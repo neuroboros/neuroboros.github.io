@@ -315,6 +315,7 @@ You might need to restart the runtime to make it work (in the menu: Runtime - Re
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%%bash
 <span class="c1"># https://handbook.datalad.org/en/latest/intro/installation.html</span>
 pip install datalad-installer
+apt install -y netbase
 datalad-installer --sudo ok git-annex -m datalad/git-annex:release
 git config --global filter.annex.process <span class="s2">&quot;git-annex filter-process&quot;</span>
 git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
