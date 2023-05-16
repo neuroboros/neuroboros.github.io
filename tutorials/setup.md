@@ -8,6 +8,7 @@ You might need to restart the runtime to make it work (in the menu: Runtime - Re
 %%bash
 # https://handbook.datalad.org/en/latest/intro/installation.html
 pip install datalad-installer
+apt install -y netbase
 datalad-installer --sudo ok git-annex -m datalad/git-annex:release
 git config --global filter.annex.process "git-annex filter-process"
 git config --global user.name "Your Name"
