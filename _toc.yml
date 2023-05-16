@@ -1,0 +1,11 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: Tutorials
+    chapters:
+    - file: tutorials/setup
+    - file: tutorials/neuroimaging_data_matrix
+    - file: tutorials/simple_hyperalignment
