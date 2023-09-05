@@ -9,3 +9,4 @@ parts:
     - file: tutorials/setup
     - file: tutorials/neuroimaging_data_matrix
     - file: tutorials/simple_hyperalignment
+    - file: tutorials/discovery
