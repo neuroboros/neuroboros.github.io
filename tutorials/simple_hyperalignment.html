@@ -48,6 +48,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using neuroboros on Discovery" href="discovery.html" />
     <link rel="prev" title="Neuroimaging data as a matrix" href="neuroimaging_data_matrix.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -125,6 +126,17 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Searchlight hyperalignment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discovery.html">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     neuroboros
+    </span>
+   </code>
+   on Discovery
   </a>
  </li>
 </ul>
@@ -358,6 +370,14 @@ title="Print to PDF"
 <p>In this example, we align the data of the 1st subject (<code class="docutils literal notranslate"><span class="pre">sids[0]</span></code>) to the data of the 2nd subject (<code class="docutils literal notranslate"><span class="pre">sids[1]</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">neuroboros</span> <span class="n">hyperalignment</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">neuroboros</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">hyperalignment</span> <span class="k">as</span> <span class="nn">ha</span>
@@ -428,7 +448,7 @@ First, we compute the correlations based on anatomically-aligned data, which are
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/miniconda3/envs/py/lib/python3.9/site-packages/neuroboros/utils/__init__.py:63: UserWarning: 69 values out of 19341 are NaNs.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/github/neuroboros/src/neuroboros/utils/__init__.py:63: UserWarning: 69 values out of 19341 are NaNs.
   warnings.warn(f&#39;{count} values out of {data.size} are NaNs.&#39;)
 </pre></div>
 </div>
@@ -439,7 +459,7 @@ First, we compute the correlations based on anatomically-aligned data, which are
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/miniconda3/envs/py/lib/python3.9/site-packages/neuroboros/utils/__init__.py:63: UserWarning: 90 values out of 19341 are NaNs.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/github/neuroboros/src/neuroboros/utils/__init__.py:63: UserWarning: 90 values out of 19341 are NaNs.
   warnings.warn(f&#39;{count} values out of {data.size} are NaNs.&#39;)
 </pre></div>
 </div>
@@ -485,7 +505,7 @@ The resulting data matrices can be considered as predicted data matrix for the 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/miniconda3/envs/py/lib/python3.9/site-packages/neuroboros/utils/__init__.py:63: UserWarning: 60 values out of 19341 are NaNs.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/github/neuroboros/src/neuroboros/utils/__init__.py:63: UserWarning: 60 values out of 19341 are NaNs.
   warnings.warn(f&#39;{count} values out of {data.size} are NaNs.&#39;)
 </pre></div>
 </div>
@@ -496,7 +516,7 @@ The resulting data matrices can be considered as predicted data matrix for the 2
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/miniconda3/envs/py/lib/python3.9/site-packages/neuroboros/utils/__init__.py:63: UserWarning: 71 values out of 19341 are NaNs.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/github/neuroboros/src/neuroboros/utils/__init__.py:63: UserWarning: 71 values out of 19341 are NaNs.
   warnings.warn(f&#39;{count} values out of {data.size} are NaNs.&#39;)
 </pre></div>
 </div>
@@ -529,7 +549,7 @@ The resulting data matrices can be considered as predicted data matrix for the 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2a533d99b4179df838396d0e1fcb013c60341981430834517cd9d15f504f2e04.png" src="../_images/2a533d99b4179df838396d0e1fcb013c60341981430834517cd9d15f504f2e04.png" />
+<img alt="../_images/2dea6b4c7ad3c0aca56c8170ccad9b5bce7c4086e4ca9e80733f53d1432eceac.png" src="../_images/2dea6b4c7ad3c0aca56c8170ccad9b5bce7c4086e4ca9e80733f53d1432eceac.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -540,7 +560,7 @@ The resulting data matrices can be considered as predicted data matrix for the 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6fc58f25f9378d6a6629334e568392c64d6b92eb03529dc960532ad8b4c4ef55.png" src="../_images/6fc58f25f9378d6a6629334e568392c64d6b92eb03529dc960532ad8b4c4ef55.png" />
+<img alt="../_images/2b9c8e7a67b4306db75a7ee57d6d0662b91c8263716b131693b207672fa1b7ed.png" src="../_images/2b9c8e7a67b4306db75a7ee57d6d0662b91c8263716b131693b207672fa1b7ed.png" />
 </div>
 </div>
 <p>In the scatterplot, most of the points are above the diagonal, which means inter-subject correlation has improved with hyperalignment.</p>
@@ -559,7 +579,7 @@ The resulting data matrices can be considered as predicted data matrix for the 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/af65665d8e59962d8123f7cde9599268755e3da0578230df3d5aacb25bdece6f.png" src="../_images/af65665d8e59962d8123f7cde9599268755e3da0578230df3d5aacb25bdece6f.png" />
+<img alt="../_images/de579cb8b43b5e237c75db6333b0471c6ce6d5db40b4ca94d583dd75be7eca1f.png" src="../_images/de579cb8b43b5e237c75db6333b0471c6ce6d5db40b4ca94d583dd75be7eca1f.png" />
 </div>
 </div>
 </div>
@@ -597,6 +617,13 @@ The resulting data matrices can be considered as predicted data matrix for the 2
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Neuroimaging data as a matrix</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="discovery.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

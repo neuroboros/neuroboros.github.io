@@ -19,15 +19,19 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 import numpy as np
 import neuroboros as nb
+import hyperalignment as ha
 import matplotlib.pyplot as plt
+from scipy.stats import zscore
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mImportError[0m                               Traceback (most recent call last)
-[0;32m<ipython-input-1-bbe6541d1f58>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-1-6693c57c0e2c>[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 2[0;31m [0;32mimport[0m [0mneuroboros[0m [0;32mas[0m [0mnb[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      3[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;32mimport[0m [0mhyperalignment[0m [0;32mas[0m [0mha[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;32mfrom[0m [0mscipy[0m[0;34m.[0m[0mstats[0m [0;32mimport[0m [0mzscore[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/github/neuroboros/src/neuroboros/__init__.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     18[0m [0;32mfrom[0m [0;34m.[0m[0mutils[0m [0;32mimport[0m [0msave_results[0m [0;32mas[0m [0mrecord[0m[0;34m[0m[0;34m[0m[0m

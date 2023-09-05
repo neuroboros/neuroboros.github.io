@@ -128,6 +128,17 @@ const thebe_selector_output = ".output, .cell_output"
    Searchlight hyperalignment
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discovery.html">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     neuroboros
+    </span>
+   </code>
+   on Discovery
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -179,53 +190,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/neuroboros/neuroboros.github.io/main?urlpath=tree/tutorials/neuroimaging_data_matrix.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://colab.research.google.com/github/neuroboros/neuroboros.github.io/blob/main/tutorials/neuroimaging_data_matrix.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -293,7 +257,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/tutorials/neuroimaging_data_matrix.ipynb"
+        <a href="../_sources/tutorials/neuroimaging_data_matrix.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -304,7 +268,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -357,169 +321,65 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="neuroimaging-data-as-a-matrix">
 <h1>Neuroimaging data as a matrix<a class="headerlink" href="#neuroimaging-data-as-a-matrix" title="Permalink to this headline">#</a></h1>
 <p>In this Jupyter Notebook we demonstrate how to access neuroimaging data with the <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> package, and what the data looks like.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">neuroboros</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p>Datasets can be accessed using the name of the dataset. For example, <code class="docutils literal notranslate"><span class="pre">nb.Forrest</span></code> is the <a class="reference external" href="https://doi.org/10.1038/sdata.2016.92">3 T data</a> of the <a class="reference external" href="https://www.studyforrest.org">StudyForrest</a> dataset.</p>
 <p>For most of the datasets, <code class="docutils literal notranslate"><span class="pre">dset.subjects</span></code> is a list of subject IDs.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Forrest</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Forrest</span><span class="p">()</span>
 <span class="n">sids</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">subjects</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">sids</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sids</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(list, 15)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sids</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sids</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;01&#39;, &#39;02&#39;, &#39;03&#39;]
-</pre></div>
-</div>
-</div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">dset.get_data</span></code> is the method used to load the data files and preprocess them. Four positional parameters are mandatery, that is, <code class="docutils literal notranslate"><span class="pre">sid</span></code> (subject ID), <code class="docutils literal notranslate"><span class="pre">task</span></code> (name of the task), <code class="docutils literal notranslate"><span class="pre">run</span></code> (run number, starting from 1), and <code class="docutils literal notranslate"><span class="pre">lr</span></code> (‘l’ for left hemisphere, ‘r’ for right, ‘lr’ for both).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sid</span> <span class="o">=</span> <span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sid</span> <span class="o">=</span> <span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;forrest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>The data is stored in a 2-D NumPy array, usually referred to as a data matrix.
 The first dimension is the time points, and the second dimension is the vertices.
 This data matrix is the responses of the left hemisphere to first run of the movie, and it has 451 time points and 9675 vertices.</p>
 <p>Sometimes the first dimension can be stimuli, and the second dimension can be voxels or components. These two dimensions are often referred to as samples and features in machine learning contexts.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">dm</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">dm</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(numpy.ndarray, dtype(&#39;float64&#39;))
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dm</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(451, 9675)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Each column of the data matrix is the response time series of a cortical vertex.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time points (TR)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/75f73e28e014bb805dec32aed2aa91f8a1e6c088774d4183e81e91cdbcb390d4.png" src="../_images/75f73e28e014bb805dec32aed2aa91f8a1e6c088774d4183e81e91cdbcb390d4.png" />
-</div>
-</div>
 <p>Each row of the data matrix is the spatial response pattern at a certain time point of the movie.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;forrest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;forrest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Response pattern&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/24adeb7905d6ce94dcb962b084879dd5def6cbc6596db1f9ef81de57674d2205.png" src="../_images/24adeb7905d6ce94dcb962b084879dd5def6cbc6596db1f9ef81de57674d2205.png" />
-</div>
-</div>
 <p>When we want to analyze a certain brain region, we can create a smaller data matrix using the indices of vertices in the region.</p>
 <p>For example, <code class="docutils literal notranslate"><span class="pre">nb.sls</span></code> returns the vertex indices of each searchlight as a NumPy array.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">sls</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">sls</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">sls</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(list, 9675)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(numpy.ndarray, 119)
-</pre></div>
-</div>
-</div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">sls[0]</span></code> is the vertex indices of the searchlight around vertex 0, and of course, vertex 0 itself is in the searchlight.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([   0, 1488, 1885, 6595,  409, 1341, 6012,  799, 8350, 8080, 8972,
-       8813, 5883,  845, 1683, 2143, 9587, 8816, 4977, 1161, 3872, 3728,
-        868, 8798,  263, 2180, 7757, 6766, 3021, 3807, 4512, 6800, 3145,
-       7768, 1748, 8105, 7597, 6797, 6950, 1631, 2997, 8907, 3637, 5618,
-       9403, 7879, 4972, 2389, 2419, 2878, 3903, 3822, 1688,  785, 6271,
-       1193, 1635, 9372, 7258, 3701, 5629, 8811, 7840, 2023, 4493, 1705,
-       1685, 2865, 2039, 7608, 5351, 7648,  929, 2784, 6093, 3219, 8630,
-       4402, 8240, 6872, 3699, 9557, 2279, 2289, 3897, 2131, 1978, 5433,
-       9262, 6507, 3094, 4408, 4838, 3154, 9132, 3905,  666, 9590, 8898,
-       2899, 3123, 7918, 7789, 1944, 9645, 1493, 2651, 4028,  441, 4855,
-         94, 2941, 3842, 9272, 4794, 5934, 6901, 9409, 5739])
-</pre></div>
-</div>
-</div>
 </div>
 <p>The searchlight has 119 vertices, and by indexing <code class="docutils literal notranslate"><span class="pre">dm</span></code> with <code class="docutils literal notranslate"><span class="pre">sls[0]</span></code>, we created a new data matrix with 119 vertices.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl_dm</span> <span class="o">=</span> <span class="n">dm</span><span class="p">[:,</span> <span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sl_dm</span> <span class="o">=</span> <span class="n">dm</span><span class="p">[:,</span> <span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 <span class="n">sl_dm</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(451, 119)
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 
