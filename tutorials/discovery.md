@@ -2,13 +2,47 @@
 
 ## Accessing Discovery
 
+### Dartmouth network or VPN
+
 [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/) is the high-performance computing (HPC) cluster of Dartmouth College. 
 To use Discovery, you need to be using either the Dartmouth network (eduroam) or the Dartmouth VPN (GlobalProtect).
 Here are the instructions on how to setup the [eduroam network](https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=64684) and the [GlobalProtect VPN](https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=72395) on your computer.
 
+### Discovery account
+
 When you are using either eduroam or the VPN, you can create a Discovery account [here](https://dashboard.dartmouth.edu/research/hpc_account).
 
+### Computing resources
+
 You may have access to the [DBIC resources on Discovery](https://www.dartmouth.edu/dbic/research_infrastructure/discovery.html). Your lab may also has its own resources. Please ask your PI about the resources that you can use and how to access them.
+
+### SSH access to Discovery
+
+After you have created a Discovery account, you can access Discovery with SSH:
+```bash
+ssh NetID@discovery7
+```
+You need to replace `NetID` with your real NetID.
+If you don't know your NetID, you can [look it up](https://lookup.dartmouth.edu/).
+
+```{margin}
+In addition to the config, you can also setup an [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+```
+
+You can edit your SSH config (located at `$HOME/.ssh/config`) to make things easier. For example, you can add the following lines to your SSH config (again, replace `NetID` with your real NetID):
+```
+Host d7
+  HostName discovery7.dartmouth.edu
+  User NetID
+Host ndoli
+  HostName ndoli.dartmouth.edu
+  User NetID
+```
+
+With these settings, you can access Discovery much easier:
+```bash
+ssh d7
+```
 
 ## Linking the data directory
 
