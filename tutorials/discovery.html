@@ -316,9 +316,36 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-discovery">
+   Accessing Discovery
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linking-the-data-directory">
    Linking the data directory
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-the-python-environment">
+   Setting up the Python environment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-the-python-module">
+     Loading the Python module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-installation">
+     Simple installation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#virtual-environment">
+     Virtual environment
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#submitting-an-interactive-job">
@@ -367,9 +394,36 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-discovery">
+   Accessing Discovery
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linking-the-data-directory">
    Linking the data directory
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-the-python-environment">
+   Setting up the Python environment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-the-python-module">
+     Loading the Python module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-installation">
+     Simple installation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#virtual-environment">
+     Virtual environment
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#submitting-an-interactive-job">
@@ -410,11 +464,61 @@ title="Print to PDF"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="using-neuroboros-on-discovery">
 <h1>Using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery<a class="headerlink" href="#using-neuroboros-on-discovery" title="Permalink to this headline">#</a></h1>
+<div class="section" id="accessing-discovery">
+<h2>Accessing Discovery<a class="headerlink" href="#accessing-discovery" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://rc.dartmouth.edu/index.php/discovery-overview/">Discovery</a> is the high-performance computing (HPC) cluster of Dartmouth College.
+To use Discovery, you need to be using either the Dartmouth network (eduroam) or the Dartmouth VPN (GlobalProtect).
+Here are the instructions on how to setup the <a class="reference external" href="https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=64684">eduroam network</a> and the <a class="reference external" href="https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=72395">GlobalProtect VPN</a> on your computer.</p>
+<p>When you are using either eduroam or the VPN, you can create a Discovery account <a class="reference external" href="https://dashboard.dartmouth.edu/research/hpc_account">here</a>.</p>
+<p>You may have access to the <a class="reference external" href="https://www.dartmouth.edu/dbic/research_infrastructure/discovery.html">DBIC resources on Discovery</a>. Your lab may also has its own resources. Please ask your PI about the resources that you can use and how to access them.</p>
+</div>
 <div class="section" id="linking-the-data-directory">
 <h2>Linking the data directory<a class="headerlink" href="#linking-the-data-directory" title="Permalink to this headline">#</a></h2>
-<p><a class="reference external" href="https://rc.dartmouth.edu/index.php/discovery-overview/">Discovery</a> is the high-performance computing (HPC) cluster of Dartmouth College. If you are using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery, you can take advantage of the datasets that are already available on the cluster through <a class="reference external" href="https://rc.dartmouth.edu/index.php/draft/data-storage-dartfs/">DartFS</a>. What you need to do is to create a symbolic link to the data directory in your home directory:</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>You can also mount DartFS on your computer, like an external hard drive. See <a class="reference external" href="https://rc.dartmouth.edu/index.php/dartfs-access-guide/">here</a> for more information.</p>
+</div>
+<p>If you are using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery, you can take advantage of the datasets that are already available on the cluster through <a class="reference external" href="https://rc.dartmouth.edu/index.php/draft/data-storage-dartfs/">DartFS</a>. What you need to do is to create a symbolic link to the data directory in your home directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln -s /dartfs/rc/lab/H/HaxbyLab/feilong/nb-data <span class="nv">$HOME</span>/.neuroboros-data
 </pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-the-python-environment">
+<h2>Setting up the Python environment<a class="headerlink" href="#setting-up-the-python-environment" title="Permalink to this headline">#</a></h2>
+<div class="section" id="loading-the-python-module">
+<h3>Loading the Python module<a class="headerlink" href="#loading-the-python-module" title="Permalink to this headline">#</a></h3>
+<p>The Python module is already installed on Discovery. You can load the Python module with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module load python
+</pre></div>
+</div>
+<p>To automatically load the Python module when you log in, you can add add it to the list of auto-loaded modules:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module initadd python
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-installation">
+<h3>Simple installation<a class="headerlink" href="#simple-installation" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> can be installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install -U neuroboros
+</pre></div>
+</div>
+<p>If you encounter any permission issues, you can install <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> with the <code class="docutils literal notranslate"><span class="pre">--user</span></code> option. This will install <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> in your home directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install --user -U neuroboros
+</pre></div>
+</div>
+</div>
+<div class="section" id="virtual-environment">
+<h3>Virtual environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">#</a></h3>
+<p>Ideally, you should create a virtual environment for each project of yours. You can create a virtual environment with Anaconda and the yml config file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f nb.yml
+</pre></div>
+</div>
+<p>The yml config file is available <a class="reference download internal" download="" href="../_downloads/6afcd12d1845ada8befcb37774fd8993/nb.yml"><span class="xref download myst">here</span></a>.</p>
+<p>This will create a virtual environment named <code class="docutils literal notranslate"><span class="pre">nb</span></code>. You can activate the virtual environment with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate nb
+</pre></div>
+</div>
+<p>Alternatively, you can create a virtual environment with Python’s <a class="reference external" href="https://docs.python.org/3/library/venv.html"><code class="docutils literal notranslate"><span class="pre">venv</span></code> module</a>.</p>
 </div>
 </div>
 <div class="section" id="submitting-an-interactive-job">

@@ -1,12 +1,67 @@
 # Using `neuroboros` on Discovery
 
+## Accessing Discovery
+
+[Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/) is the high-performance computing (HPC) cluster of Dartmouth College. 
+To use Discovery, you need to be using either the Dartmouth network (eduroam) or the Dartmouth VPN (GlobalProtect).
+Here are the instructions on how to setup the [eduroam network](https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=64684) and the [GlobalProtect VPN](https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=72395) on your computer.
+
+When you are using either eduroam or the VPN, you can create a Discovery account [here](https://dashboard.dartmouth.edu/research/hpc_account).
+
+You may have access to the [DBIC resources on Discovery](https://www.dartmouth.edu/dbic/research_infrastructure/discovery.html). Your lab may also has its own resources. Please ask your PI about the resources that you can use and how to access them.
+
 ## Linking the data directory
 
-[Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/) is the high-performance computing (HPC) cluster of Dartmouth College. If you are using `neuroboros` on Discovery, you can take advantage of the datasets that are already available on the cluster through [DartFS](https://rc.dartmouth.edu/index.php/draft/data-storage-dartfs/). What you need to do is to create a symbolic link to the data directory in your home directory:
+```{margin}
+You can also mount DartFS on your computer, like an external hard drive. See [here](https://rc.dartmouth.edu/index.php/dartfs-access-guide/) for more information.
+```
+
+If you are using `neuroboros` on Discovery, you can take advantage of the datasets that are already available on the cluster through [DartFS](https://rc.dartmouth.edu/index.php/draft/data-storage-dartfs/). What you need to do is to create a symbolic link to the data directory in your home directory:
 
 ```bash
 ln -s /dartfs/rc/lab/H/HaxbyLab/feilong/nb-data $HOME/.neuroboros-data
 ```
+
+## Setting up the Python environment
+
+### Loading the Python module
+The Python module is already installed on Discovery. You can load the Python module with the following command:
+```bash
+module load python
+```
+
+To automatically load the Python module when you log in, you can add add it to the list of auto-loaded modules:
+```bash
+module initadd python
+```
+
+### Simple installation
+
+`neuroboros` can be installed with `pip`:
+```bash
+python -m pip install -U neuroboros
+```
+
+If you encounter any permission issues, you can install `neuroboros` with the `--user` option. This will install `neuroboros` in your home directory:
+```bash
+python -m pip install --user -U neuroboros
+```
+
+### Virtual environment
+
+Ideally, you should create a virtual environment for each project of yours. You can create a virtual environment with Anaconda and the yml config file:
+```bash
+conda env create -f nb.yml
+```
+
+The yml config file is available [here](nb.yml).
+
+This will create a virtual environment named `nb`. You can activate the virtual environment with the following command:
+```bash
+conda activate nb
+```
+
+Alternatively, you can create a virtual environment with Python's [`venv` module](https://docs.python.org/3/library/venv.html).
 
 ## Submitting an interactive job
 
@@ -35,7 +90,6 @@ If your script is a Jupyter notebook, you can convert it to a Python script with
 ```bash
 jupyter nbconvert --to python my_script.ipynb
 ```
-
 
 ## Submitting a batch job
 
@@ -112,4 +166,3 @@ import sys
 arg = int(sys.argv[1])
 print(arg)
 ```
-
