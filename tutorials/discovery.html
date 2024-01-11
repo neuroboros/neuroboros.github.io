@@ -319,6 +319,28 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#accessing-discovery">
    Accessing Discovery
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dartmouth-network-or-vpn">
+     Dartmouth network or VPN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discovery-account">
+     Discovery account
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-resources">
+     Computing resources
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssh-access-to-discovery">
+     SSH access to Discovery
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linking-the-data-directory">
@@ -397,6 +419,28 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#accessing-discovery">
    Accessing Discovery
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dartmouth-network-or-vpn">
+     Dartmouth network or VPN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discovery-account">
+     Discovery account
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-resources">
+     Computing resources
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssh-access-to-discovery">
+     SSH access to Discovery
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linking-the-data-directory">
@@ -466,17 +510,52 @@ title="Print to PDF"
 <h1>Using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery<a class="headerlink" href="#using-neuroboros-on-discovery" title="Permalink to this headline">#</a></h1>
 <div class="section" id="accessing-discovery">
 <h2>Accessing Discovery<a class="headerlink" href="#accessing-discovery" title="Permalink to this headline">#</a></h2>
+<div class="section" id="dartmouth-network-or-vpn">
+<h3>Dartmouth network or VPN<a class="headerlink" href="#dartmouth-network-or-vpn" title="Permalink to this headline">#</a></h3>
 <p><a class="reference external" href="https://rc.dartmouth.edu/index.php/discovery-overview/">Discovery</a> is the high-performance computing (HPC) cluster of Dartmouth College.
 To use Discovery, you need to be using either the Dartmouth network (eduroam) or the Dartmouth VPN (GlobalProtect).
 Here are the instructions on how to setup the <a class="reference external" href="https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=64684">eduroam network</a> and the <a class="reference external" href="https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=72395">GlobalProtect VPN</a> on your computer.</p>
+</div>
+<div class="section" id="discovery-account">
+<h3>Discovery account<a class="headerlink" href="#discovery-account" title="Permalink to this headline">#</a></h3>
 <p>When you are using either eduroam or the VPN, you can create a Discovery account <a class="reference external" href="https://dashboard.dartmouth.edu/research/hpc_account">here</a>.</p>
+</div>
+<div class="section" id="computing-resources">
+<h3>Computing resources<a class="headerlink" href="#computing-resources" title="Permalink to this headline">#</a></h3>
 <p>You may have access to the <a class="reference external" href="https://www.dartmouth.edu/dbic/research_infrastructure/discovery.html">DBIC resources on Discovery</a>. Your lab may also has its own resources. Please ask your PI about the resources that you can use and how to access them.</p>
+</div>
+<div class="section" id="ssh-access-to-discovery">
+<h3>SSH access to Discovery<a class="headerlink" href="#ssh-access-to-discovery" title="Permalink to this headline">#</a></h3>
+<p>After you have created a Discovery account, you can access Discovery with SSH:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh NetID@discovery7
+</pre></div>
+</div>
+<p>You need to replace <code class="docutils literal notranslate"><span class="pre">NetID</span></code> with your real NetID.
+If you don’t know your NetID, you can <a class="reference external" href="https://lookup.dartmouth.edu/">look it up</a>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In addition to the config, you can also setup an <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">SSH key</a>.</p>
+</div>
+<p>You can edit your SSH config (located at <code class="docutils literal notranslate"><span class="pre">$HOME/.ssh/config</span></code>) to make things easier. For example, you can add the following lines to your SSH config (again, replace <code class="docutils literal notranslate"><span class="pre">NetID</span></code> with your real NetID):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">d7</span>
+  <span class="n">HostName</span> <span class="n">discovery7</span><span class="o">.</span><span class="n">dartmouth</span><span class="o">.</span><span class="n">edu</span>
+  <span class="n">User</span> <span class="n">NetID</span>
+<span class="n">Host</span> <span class="n">ndoli</span>
+  <span class="n">HostName</span> <span class="n">ndoli</span><span class="o">.</span><span class="n">dartmouth</span><span class="o">.</span><span class="n">edu</span>
+  <span class="n">User</span> <span class="n">NetID</span>
+</pre></div>
+</div>
+<p>With these settings, you can access Discovery much easier:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh d7
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="linking-the-data-directory">
 <h2>Linking the data directory<a class="headerlink" href="#linking-the-data-directory" title="Permalink to this headline">#</a></h2>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>You can also mount DartFS on your computer, like an external hard drive. See <a class="reference external" href="https://rc.dartmouth.edu/index.php/dartfs-access-guide/">here</a> for more information.</p>
+<p>It is possible mount DartFS on your computer, like an external hard drive. See <a class="reference external" href="https://rc.dartmouth.edu/index.php/dartfs-access-guide/">here</a> for more information.</p>
 </div>
 <p>If you are using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery, you can take advantage of the datasets that are already available on the cluster through <a class="reference external" href="https://rc.dartmouth.edu/index.php/draft/data-storage-dartfs/">DartFS</a>. What you need to do is to create a symbolic link to the data directory in your home directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln -s /dartfs/rc/lab/H/HaxbyLab/feilong/nb-data <span class="nv">$HOME</span>/.neuroboros-data
