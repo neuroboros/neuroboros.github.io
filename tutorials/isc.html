@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neuroimaging data as a matrix</title>
+    <title>Inter-subject correlation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -48,8 +48,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Searchlight hyperalignment" href="simple_hyperalignment.html" />
-    <link rel="prev" title="Setup environment for Colab" href="setup.html" />
+    <link rel="prev" title="Functional connectivity" href="fc.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,8 +117,8 @@ const thebe_selector_output = ".output, .cell_output"
    Setup environment for Colab
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="neuroimaging_data_matrix.html">
    Neuroimaging data as a matrix
   </a>
  </li>
@@ -149,8 +148,8 @@ const thebe_selector_output = ".output, .cell_output"
    Functional connectivity
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isc.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Inter-subject correlation
   </a>
  </li>
@@ -213,7 +212,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://colab.research.google.com/github/neuroboros/neuroboros.github.io/blob/main/tutorials/neuroimaging_data_matrix.ipynb"
+        <a href="https://colab.research.google.com/github/neuroboros/neuroboros.github.io/blob/main/tutorials/isc.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -273,7 +272,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/neuroboros/neuroboros.github.io/issues/new?title=Issue%20on%20page%20%2Ftutorials/neuroimaging_data_matrix.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/neuroboros/neuroboros.github.io/issues/new?title=Issue%20on%20page%20%2Ftutorials/isc.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -301,7 +300,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/tutorials/neuroimaging_data_matrix.ipynb"
+        <a href="../_sources/tutorials/isc.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -338,23 +337,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Neuroimaging data as a matrix</h1>
+                <h1>Inter-subject correlation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -362,173 +398,156 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="neuroimaging-data-as-a-matrix">
-<h1>Neuroimaging data as a matrix<a class="headerlink" href="#neuroimaging-data-as-a-matrix" title="Permalink to this headline">#</a></h1>
-<p>In this Jupyter Notebook we demonstrate how to access neuroimaging data with the <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> package, and what the data looks like.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
-<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">neuroboros</span> <span class="n">hyperalignment</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="inter-subject-correlation">
+<h1>Inter-subject correlation<a class="headerlink" href="#inter-subject-correlation" title="Permalink to this headline">#</a></h1>
+<p>Inter-subject correlation measures to what extent the same location in two brains are synchronized with each other.
+It is usually quantified using the Pearson correlation between their time series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">neuroboros</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span><span class="p">,</span> <span class="n">zscore</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Datasets can be accessed using the name of the dataset. For example, <code class="docutils literal notranslate"><span class="pre">nb.Forrest</span></code> is the <a class="reference external" href="https://doi.org/10.1038/sdata.2016.92">3 T data</a> of the <a class="reference external" href="https://www.studyforrest.org">StudyForrest</a> dataset.</p>
-<p>For most of the datasets, <code class="docutils literal notranslate"><span class="pre">dset.subjects</span></code> is a list of subject IDs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Forrest</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Budapest</span><span class="p">()</span>
 <span class="n">sids</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">subjects</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">sids</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sids</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we use the first two participants’ data matrices. We use data from both hemispheres.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm1</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;budapest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">)</span>
+<span class="n">dm2</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sids</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;budapest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dm1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dm2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(list, 15)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(598, 19341) (598, 19341)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sids</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nt</span><span class="p">,</span> <span class="n">nv</span> <span class="o">=</span> <span class="n">dm1</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each vertex, we compute the correlation between the first participant’s response time series and the second participant’s.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">isc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nv</span><span class="p">,))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
+    <span class="n">isc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">dm1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">dm2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The correlation can also be computed using <code class="docutils literal notranslate"><span class="pre">zscore</span></code>d data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">isc2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+    <span class="n">zscore</span><span class="p">(</span><span class="n">dm1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">zscore</span><span class="p">(</span><span class="n">dm2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">isc</span><span class="p">,</span> <span class="n">isc2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">isc</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Inter-subject correlation&#39;</span><span class="p">,</span>
+        <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;01&#39;, &#39;02&#39;, &#39;03&#39;]
+<img alt="../_images/6e2aa01526e4e5b1c3fa366509ee16ae430bb2e97e3eecb9ce33e3989b565b0e.png" src="../_images/6e2aa01526e4e5b1c3fa366509ee16ae430bb2e97e3eecb9ce33e3989b565b0e.png" />
+</div>
+</div>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<p>Try to use <code class="docutils literal notranslate"><span class="pre">pdist</span></code> to compute the average ISC between all pairs of participants and plot the average ISC map using <code class="docutils literal notranslate"><span class="pre">nb.plot</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dms</span> <span class="o">=</span> <span class="p">[</span><span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;budapest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">)</span>
+       <span class="k">for</span> <span class="n">sid</span> <span class="ow">in</span> <span class="n">sids</span><span class="p">]</span>
+<span class="n">dms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dms</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">dset.get_data</span></code> is the method used to load the data files and preprocess them. Four positional parameters are mandatery, that is, <code class="docutils literal notranslate"><span class="pre">sid</span></code> (subject ID), <code class="docutils literal notranslate"><span class="pre">task</span></code> (name of the task), <code class="docutils literal notranslate"><span class="pre">run</span></code> (run number, starting from 1), and <code class="docutils literal notranslate"><span class="pre">lr</span></code> (‘l’ for left hemisphere, ‘r’ for right, ‘lr’ for both).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sid</span> <span class="o">=</span> <span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;forrest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The data is stored in a 2-D NumPy array, usually referred to as a data matrix.
-The first dimension is the time points, and the second dimension is the vertices.
-This data matrix is the responses of the left hemisphere to first run of the movie, and it has 451 time points and 9675 vertices.</p>
-<p>Sometimes the first dimension can be stimuli, and the second dimension can be voxels or components. These two dimensions are often referred to as samples and features in machine learning contexts.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">dm</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dms</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(numpy.ndarray, dtype(&#39;float64&#39;))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(21, 598, 19341)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">isc_all</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pdist</span><span class="p">(</span><span class="n">dms</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">)],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">isc_all</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">isc_all</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 19341)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">avg</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Inter-subject correlation&#39;</span><span class="p">,</span>
+        <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(451, 9675)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Each column of the data matrix is the response time series of a cortical vertex.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time points (TR)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/75f73e28e014bb805dec32aed2aa91f8a1e6c088774d4183e81e91cdbcb390d4.png" src="../_images/75f73e28e014bb805dec32aed2aa91f8a1e6c088774d4183e81e91cdbcb390d4.png" />
-</div>
-</div>
-<p>Each row of the data matrix is the spatial response pattern at a certain time point of the movie.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;forrest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
-       <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Response pattern&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/24adeb7905d6ce94dcb962b084879dd5def6cbc6596db1f9ef81de57674d2205.png" src="../_images/24adeb7905d6ce94dcb962b084879dd5def6cbc6596db1f9ef81de57674d2205.png" />
-</div>
-</div>
-<p>When we want to analyze a certain brain region, we can create a smaller data matrix using the indices of vertices in the region.</p>
-<p>For example, <code class="docutils literal notranslate"><span class="pre">nb.sls</span></code> returns the vertex indices of each searchlight as a NumPy array.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">sls</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">sls</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(numpy.ndarray, 119)
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">sls[0]</span></code> is the vertex indices of the searchlight around vertex 0, and of course, vertex 0 itself is in the searchlight.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([   0, 1488, 1885, 6595,  409, 1341, 6012,  799, 8350, 8080, 8972,
-       8813, 5883,  845, 1683, 2143, 9587, 8816, 4977, 1161, 3872, 3728,
-        868, 8798,  263, 2180, 7757, 6766, 3021, 3807, 4512, 6800, 3145,
-       7768, 1748, 8105, 7597, 6797, 6950, 1631, 2997, 8907, 3637, 5618,
-       9403, 7879, 4972, 2389, 2419, 2878, 3903, 3822, 1688,  785, 6271,
-       1193, 1635, 9372, 7258, 3701, 5629, 8811, 7840, 2023, 4493, 1705,
-       1685, 2865, 2039, 7608, 5351, 7648,  929, 2784, 6093, 3219, 8630,
-       4402, 8240, 6872, 3699, 9557, 2279, 2289, 3897, 2131, 1978, 5433,
-       9262, 6507, 3094, 4408, 4838, 3154, 9132, 3905,  666, 9590, 8898,
-       2899, 3123, 7918, 7789, 1944, 9645, 1493, 2651, 4028,  441, 4855,
-         94, 2941, 3842, 9272, 4794, 5934, 6901, 9409, 5739])
-</pre></div>
-</div>
-</div>
-</div>
-<p>The searchlight has 119 vertices, and by indexing <code class="docutils literal notranslate"><span class="pre">dm</span></code> with <code class="docutils literal notranslate"><span class="pre">sls[0]</span></code>, we created a new data matrix with 119 vertices.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl_dm</span> <span class="o">=</span> <span class="n">dm</span><span class="p">[:,</span> <span class="n">sls</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">sl_dm</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(451, 119)
-</pre></div>
+<img alt="../_images/08c2c44700cd9e1aeb8aa4a025f385b7485a2dc41d16b0f0a62e0a684a66fadb.png" src="../_images/08c2c44700cd9e1aeb8aa4a025f385b7485a2dc41d16b0f0a62e0a684a66fadb.png" />
 </div>
 </div>
 </div>
@@ -561,19 +580,12 @@ This data matrix is the responses of the left hemisphere to first run of the mov
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="setup.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="fc.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Setup environment for Colab</p>
+            <p class="prev-next-title">Functional connectivity</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="simple_hyperalignment.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Searchlight hyperalignment</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
