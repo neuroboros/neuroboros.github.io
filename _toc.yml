@@ -10,3 +10,6 @@ parts:
     - file: tutorials/neuroimaging_data_matrix
     - file: tutorials/simple_hyperalignment
     - file: tutorials/discovery
+    - file: tutorials/rsa
+    - file: tutorials/fc
+    - file: tutorials/isc
