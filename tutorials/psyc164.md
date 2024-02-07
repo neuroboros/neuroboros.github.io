@@ -37,3 +37,7 @@ conda create --name nb "python>=3.9" pip
 pip install -U numpy scipy scikit-learn nibabel pandas matplotlib seaborn ipython jupyter jupyterlab nipy hyperalignment
 pip install -U neuroboros
 ```
+
+The environment might be updated as the course progresses.
+To keep a copy of the environment as it currently is, you can [clone the environment](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#cloning-an-environment
+).
