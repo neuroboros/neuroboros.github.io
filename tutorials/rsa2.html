@@ -435,10 +435,19 @@ document.write(`
 <p>In this Notebook, we will go through how to compute model RDMs and compare them with brain RDMs.</p>
 <section id="preparations">
 <h2>Preparations<a class="headerlink" href="#preparations" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">neuroboros</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">neuroboros</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">cdist</span><span class="p">,</span> <span class="n">squareform</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
@@ -699,7 +708,7 @@ Other participants may only have the Life documentary data.</p>
 <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">,</span> <span class="s1">&#39;beh&#39;</span><span class="p">]:</span>
     <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">delayed</span><span class="p">(</span><span class="n">compute_rs</span><span class="p">)(</span><span class="n">dset</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="p">[</span><span class="n">tax</span><span class="p">,</span> <span class="n">beh</span><span class="p">])</span>
             <span class="k">for</span> <span class="n">sid</span> <span class="ow">in</span> <span class="n">sids</span><span class="p">]</span>
-    <span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;threading&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
         <span class="n">rs</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
     <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
     <span class="n">all_rs</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">=</span> <span class="n">rs</span>
@@ -793,12 +802,19 @@ Other participants may only have the Life documentary data.</p>
 <h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
 <p>In this Notebook, we use Pearson correlations everywhere for simplicity.
 Depending on the type of the RDMs, there might be better ways to compute RDM similarities, such as Spearman correlation or Kendall’s tau.</p>
-<p>Try to perform the analysis with these alternative similarity measures.
-These functions from <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> might be helpful.</p>
 <ul class="simple">
+<li><p>Try to perform the analysis with these alternative similarity measures.
+These functions from <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> might be helpful.</p>
+<ul>
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rankdata.html">scipy.stats.rankdata</a></p></li>
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html">scipy.stats.spearmanr</a></p></li>
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html">scipy.stats.kendalltau</a></p></li>
+</ul>
+</li>
+<li><p>Try to use a different searchlight radius to compute the brain RDMs (e.g., 10 mm, 15 mm).
+How does this change the results?</p></li>
+<li><p>Try to use the t-map instead of the beta-map for the contrasts (<code class="docutils literal notranslate"><span class="pre">kind='t'</span></code> for <code class="docutils literal notranslate"><span class="pre">dset.load_contrasts</span></code>).
+How does this change the results?</p></li>
 </ul>
 </section>
 </section>
