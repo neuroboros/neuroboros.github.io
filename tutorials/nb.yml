@@ -1,0 +1,23 @@
+name: nb
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.9
+  - numpy
+  - scipy
+  - scikit-learn
+  - nibabel
+  - pandas
+  - matplotlib
+  - seaborn
+  - ipython
+  - jupyter
+  - jupyterlab
+  - opencv
+  - vtk
+  - openh264
+  - pip
+  - pip:
+    - nipy
+    - neuroboros
+    - hyperalignment
