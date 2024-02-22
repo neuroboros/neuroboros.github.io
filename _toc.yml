@@ -16,3 +16,4 @@ parts:
     - file: tutorials/isc
     - file: tutorials/rsa2
     - file: tutorials/roi_tpl
+    - file: tutorials/int
