@@ -17,3 +17,4 @@ parts:
     - file: tutorials/rsa2
     - file: tutorials/roi_tpl
     - file: tutorials/int
+    - file: tutorials/slha
