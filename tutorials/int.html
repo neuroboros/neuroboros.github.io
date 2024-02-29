@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/int';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Searchlight hyperalignment" href="slha.html" />
     <link rel="prev" title="Local hyperalignment template" href="roi_tpl.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="rsa2.html">RSA with model RDMs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roi_tpl.html">Local hyperalignment template</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Individualized Neural Tuning Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slha.html">Searchlight hyperalignment</a></li>
 </ul>
 
     </div>
@@ -813,7 +815,7 @@ We normalize each row and each column to zero mean to emphasize the differences 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time point (predicted)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time point (measured)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -825,7 +827,7 @@ We normalize each row and each column to zero mean to emphasize the differences 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6ad21651e639d06589cf67138df3e763c57c100aebf69062d017b8f40b0aaf3c.png" src="../_images/6ad21651e639d06589cf67138df3e763c57c100aebf69062d017b8f40b0aaf3c.png" />
+<img alt="../_images/9866b02f1734a0093d509578d725eba53d747131a3d79e100988c7e43ff6bb6e.png" src="../_images/9866b02f1734a0093d509578d725eba53d747131a3d79e100988c7e43ff6bb6e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -977,6 +979,15 @@ This can be done by rewrite the comparison <code class="docutils literal notrans
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Local hyperalignment template</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="slha.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Searchlight hyperalignment</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
