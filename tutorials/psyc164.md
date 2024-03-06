@@ -34,6 +34,7 @@ For records, the environment was created using the following commands:
 
 ```bash
 conda create --name nb "python>=3.9" pip
+conda activate nb
 pip install -U numpy scipy scikit-learn nibabel pandas matplotlib seaborn ipython jupyter jupyterlab nipy hyperalignment
 pip install -U neuroboros
 ```
