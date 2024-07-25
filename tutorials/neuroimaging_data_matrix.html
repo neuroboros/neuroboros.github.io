@@ -187,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="fc.html">Functional connectivity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isc.html">Inter-subject correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rsa2.html">RSA with model RDMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvpc.html">Multivariate pattern classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roi_tpl.html">Local hyperalignment template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="int.html">Individualized Neural Tuning Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slha.html">Searchlight hyperalignment</a></li>
@@ -514,19 +515,19 @@ This data matrix is the responses of the left hemisphere to first run of the mov
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/75f73e28e014bb805dec32aed2aa91f8a1e6c088774d4183e81e91cdbcb390d4.png" src="../_images/75f73e28e014bb805dec32aed2aa91f8a1e6c088774d4183e81e91cdbcb390d4.png" />
+<img alt="../_images/f26610211b4fd03a37d223555a5eee1230172e46e7fd8e855e5ebe2338725862.png" src="../_images/f26610211b4fd03a37d223555a5eee1230172e46e7fd8e855e5ebe2338725862.png" />
 </div>
 </div>
 <p>Each row of the data matrix is the spatial response pattern at a certain time point of the movie.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;forrest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
-       <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Response pattern&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+       <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Response pattern&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/24adeb7905d6ce94dcb962b084879dd5def6cbc6596db1f9ef81de57674d2205.png" src="../_images/24adeb7905d6ce94dcb962b084879dd5def6cbc6596db1f9ef81de57674d2205.png" />
+<img alt="../_images/c71db9399f08265dd9337831c598eefc9bb030009a3e6352f86fcf5b60c82cc3.png" src="../_images/c71db9399f08265dd9337831c598eefc9bb030009a3e6352f86fcf5b60c82cc3.png" />
 </div>
 </div>
 <p>When we want to analyze a certain brain region, we can create a smaller data matrix using the indices of vertices in the region.</p>
@@ -535,6 +536,11 @@ This data matrix is the responses of the left hemisphere to first run of the mov
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">sls</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">sls</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(list, 9675)
 </pre></div>
 </div>
 </div>

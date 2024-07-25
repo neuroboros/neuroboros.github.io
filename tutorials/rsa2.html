@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/rsa2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Local hyperalignment template" href="roi_tpl.html" />
+    <link rel="next" title="Multivariate pattern classification" href="mvpc.html" />
     <link rel="prev" title="Inter-subject correlation" href="isc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="fc.html">Functional connectivity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isc.html">Inter-subject correlation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">RSA with model RDMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvpc.html">Multivariate pattern classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roi_tpl.html">Local hyperalignment template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="int.html">Individualized Neural Tuning Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slha.html">Searchlight hyperalignment</a></li>
@@ -538,8 +539,8 @@ Other participants may only have the Life documentary data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.   0.25 0.5  0.75 1.   1.25 1.5  1.75 2.   2.25 2.5  2.75 3.   3.25 3.5  3.75 4.   4.25 4.5
- 4.75]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.   0.25 0.5  0.75 1.   1.25 1.5  1.75 2.   2.25 2.5  2.75 3.   3.25
+ 3.5  3.75 4.   4.25 4.5  4.75]
 </pre></div>
 </div>
 </div>
@@ -636,7 +637,7 @@ Other participants may only have the Life documentary data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/63ca7a46ed726c669675559288f60b5e07a2fb47d0acb618704ff7e5666a60fd.png" src="../_images/63ca7a46ed726c669675559288f60b5e07a2fb47d0acb618704ff7e5666a60fd.png" />
+<img alt="../_images/1a50868cee65baf8ea4b1008da7db8c6288fbda3692becc1a41f191d47233ea0.png" src="../_images/1a50868cee65baf8ea4b1008da7db8c6288fbda3692becc1a41f191d47233ea0.png" />
 </div>
 </div>
 </section>
@@ -771,7 +772,7 @@ Other participants may only have the Life documentary data.</p>
 </div>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">,</span> <span class="s1">&#39;congruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">,</span> <span class="s1">&#39;congruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Taxonomic model, congruent&#39;</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="s1">&#39;tax_c.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -779,7 +780,7 @@ Other participants may only have the Life documentary data.</p>
 </div>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">,</span> <span class="s1">&#39;incongruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">,</span> <span class="s1">&#39;incongruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Taxonomic model, incongruent&#39;</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="s1">&#39;tax_i.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -787,7 +788,7 @@ Other participants may only have the Life documentary data.</p>
 </div>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;beh&#39;</span><span class="p">,</span> <span class="s1">&#39;congruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;beh&#39;</span><span class="p">,</span> <span class="s1">&#39;congruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Behavioral model, congruent&#39;</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="s1">&#39;beh_c.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -795,7 +796,7 @@ Other participants may only have the Life documentary data.</p>
 </div>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;beh&#39;</span><span class="p">,</span> <span class="s1">&#39;incongruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="s1">&#39;beh&#39;</span><span class="p">,</span> <span class="s1">&#39;incongruent&#39;</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Behavioral model, incongruent&#39;</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="s1">&#39;beh_i.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -863,11 +864,11 @@ How does this change the results?</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="roi_tpl.html"
+       href="mvpc.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Local hyperalignment template</p>
+        <p class="prev-next-title">Multivariate pattern classification</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

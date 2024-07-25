@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Individualized Neural Tuning Model</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'backup_build/jupyter_execute/tutorials/int';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo_name_blk.png" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../../_static/logo_name_blk.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    neuroboros: Neuroimaging analysis in Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/setup.html">Setup environment for Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/neuroimaging_data_matrix.html">Neuroimaging data as a matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/simple_hyperalignment.html">Searchlight hyperalignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/discovery.html">Using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/psyc164.html">Environment for PSYC164</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/rsa.html">Representational similarity analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/fc.html">Functional connectivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/isc.html">Inter-subject correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/rsa2.html">RSA with model RDMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/mvpc.html">Multivariate pattern classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/roi_tpl.html">Local hyperalignment template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/int.html">Individualized Neural Tuning Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/slha.html">Searchlight hyperalignment</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/neuroboros/neuroboros.github.io/blob/main/backup_build/jupyter_execute/tutorials/int.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/neuroboros/neuroboros.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/neuroboros/neuroboros.github.io/issues/new?title=Issue%20on%20page%20%2Fbackup_build/jupyter_execute/tutorials/int.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/backup_build/jupyter_execute/tutorials/int.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Individualized Neural Tuning Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparations">Preparations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest-roi">Region of interest (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-folding">Data folding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-functional-template">Create functional template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stimulus-matrix">Stimulus matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individualized-neural-tuning">Individualized neural tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-movie-part-similarities">Cross-movie-part similarities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalize-the-similarity-matrix">Normalize the similarity matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#movie-time-point-segment-classification">Movie time point/segment classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#movie-segment-classification">Movie segment classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary classification</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="individualized-neural-tuning-model">
+<h1>Individualized Neural Tuning Model<a class="headerlink" href="#individualized-neural-tuning-model" title="Link to this heading">#</a></h1>
+<p>In this Notebook, we will go through how to use the Individualized Neural Tuning (INT) model to model the responses of an individual with a shared functional template and individualized transforms.</p>
+<section id="preparations">
+<h2>Preparations<a class="headerlink" href="#preparations" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">neuroboros</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">neuroboros</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">cdist</span><span class="p">,</span> <span class="n">squareform</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+
+<span class="kn">from</span> <span class="nn">hyperalignment.procrustes</span> <span class="kn">import</span> <span class="n">procrustes</span>
+<span class="kn">from</span> <span class="nn">hyperalignment.ridge</span> <span class="kn">import</span> <span class="n">ridge</span>
+<span class="kn">from</span> <span class="nn">hyperalignment.local_template</span> <span class="kn">import</span> <span class="n">compute_template</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Life dataset contains fMRI data (a) during watching the Life documentary and (b) during watching videos of various actions of various animals. See Nastase et al. (<a class="reference external" href="https://doi.org/10.1093/cercor/bhx138">2017</a>, <a class="reference external" href="https://doi.org/10.3389/fnins.2018.00316">2018</a>) for more details.</p>
+<p>This example focuses on the movie data (Life documentary).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Life</span><span class="p">()</span>
+<span class="n">sids</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">subjects</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="region-of-interest-roi">
+<h2>Region of interest (ROI)<a class="headerlink" href="#region-of-interest-roi" title="Link to this heading">#</a></h2>
+<p>Similar to the previous tutorial, we will use a searchlight from the ventral temporal cortex as the ROI.</p>
+<p>The searchlight index is 4586 for the left hemisphere, and 5876 for the right hemisphere.</p>
+<a class="reference internal image-reference" href="backup_build/jupyter_execute/tutorials/vt_roi.png"><img alt="VT ROI" class="align-center" src="backup_build/jupyter_execute/tutorials/vt_roi.png" style="width: 500px;" /></a>
+</section>
+<section id="data-folding">
+<h2>Data folding<a class="headerlink" href="#data-folding" title="Link to this heading">#</a></h2>
+<p>To properly test the generalizability of a model, it is critical to evaluate the performance of the model using data that’s independent of the training data.
+The <em>Life</em> dataset has 19 participants, and we will use the first 10 participants to build the template, and the remaining 9 participants to evaluate performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">sids</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sls</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">sls</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">sls</span><span class="p">[</span><span class="mi">5876</span><span class="p">]</span>
+
+<span class="n">dms12</span><span class="p">,</span> <span class="n">dms34</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sid</span> <span class="ow">in</span> <span class="n">sids</span><span class="p">:</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;life&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)[:,</span> <span class="n">roi</span><span class="p">]</span>
+    <span class="n">dms12</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="p">)</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;life&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)[:,</span> <span class="n">roi</span><span class="p">]</span>
+    <span class="n">dms34</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="p">)</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dms12</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dms34</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dms12</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">test34</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dms34</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test12</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test34</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 1479, 122) (9, 704, 122) (9, 775, 122)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-functional-template">
+<h2>Create functional template<a class="headerlink" href="#create-functional-template" title="Link to this heading">#</a></h2>
+<p>Here we create the local functional template in the same way as the previous tutorial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">nv</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">safe_svd</span><span class="p">(</span>
+    <span class="n">train</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">ns</span> <span class="o">*</span> <span class="n">nv</span><span class="p">))</span>
+<span class="n">pc_tpl</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">nv</span><span class="p">]</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:</span><span class="n">nv</span><span class="p">]</span>
+
+<span class="n">RR</span> <span class="o">=</span> <span class="n">procrustes</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">pc_tpl</span><span class="p">]</span> <span class="o">*</span> <span class="n">ns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ns</span> <span class="o">*</span> <span class="n">nt</span><span class="p">,</span> <span class="n">nv</span><span class="p">))</span>
+<span class="n">tpl</span> <span class="o">=</span> <span class="n">pc_tpl</span> <span class="o">@</span> <span class="n">RR</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tpl</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1479, 122)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="stimulus-matrix">
+<h2>Stimulus matrix<a class="headerlink" href="#stimulus-matrix" title="Link to this heading">#</a></h2>
+<p>We use the normalized PCs as the stimulus matrix <span class="math notranslate nohighlight">\(S\)</span> in the INT model.
+We normalize each PC to unit variance, so that the tuning matrix <span class="math notranslate nohighlight">\(T\)</span> does not change with the number of time points of input data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.026, 0.026, 0.026, ..., 0.026, 0.026, 0.026])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">U</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1., 1., ..., 1., 1., 1.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that usually <span class="math notranslate nohighlight">\(S\)</span> is derived based on PCA of <strong>all vertices of all participants</strong>, and the number of features (<span class="math notranslate nohighlight">\(n_s \times n_v\)</span>) is far larger than the number of time points (<span class="math notranslate nohighlight">\(n_t\)</span>), so <span class="math notranslate nohighlight">\(U\)</span> (and <span class="math notranslate nohighlight">\(S\)</span>) is a square matrix with full rank.</p>
+<p>In this example, we used only vertices in the ROI, and <span class="math notranslate nohighlight">\(S\)</span> is a singular matrix that is not invertible, so we used the pseudo-inverse (<code class="docutils literal notranslate"><span class="pre">np.linalg.pinv</span></code>) instead of the inverse (<code class="docutils literal notranslate"><span class="pre">np.linalg.inv</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="individualized-neural-tuning">
+<h2>Individualized neural tuning<a class="headerlink" href="#individualized-neural-tuning" title="Link to this heading">#</a></h2>
+<p>By <strong>aligning the template to each individual</strong>, we derive the individualized transform for each individual (and each part of the movie).
+These individualized transforms can be converted to individualized tuning matrices (<span class="math notranslate nohighlight">\(T\)</span>s).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Bhats12</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Ts12</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">dm</span> <span class="ow">in</span> <span class="n">test12</span><span class="p">:</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">ridge</span><span class="p">(</span><span class="n">tpl</span><span class="p">[:</span><span class="mi">704</span><span class="p">],</span> <span class="n">dm</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">)</span>
+    <span class="n">Bhat</span> <span class="o">=</span> <span class="n">tpl</span> <span class="o">@</span> <span class="n">W</span>
+    <span class="n">Bhats12</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Bhat</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">S_inv</span> <span class="o">@</span> <span class="n">Bhat</span>
+    <span class="n">Ts12</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">Ts12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">Ts12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ts12</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 1220, 122)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Bhats34</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Ts34</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">dm</span> <span class="ow">in</span> <span class="n">test34</span><span class="p">:</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">ridge</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">704</span><span class="p">:],</span> <span class="n">dm</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">)</span>
+    <span class="n">Bhat</span> <span class="o">=</span> <span class="n">tpl</span> <span class="o">@</span> <span class="n">W</span>
+    <span class="n">Bhats34</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Bhat</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">S_inv</span> <span class="o">@</span> <span class="n">Bhat</span>
+    <span class="n">Ts34</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">Ts34</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">Ts34</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ts34</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 1220, 122)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Bhats12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">Bhats12</span><span class="p">)</span>
+<span class="n">Bhats34</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">Bhats34</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cross-movie-part-similarities">
+<h2>Cross-movie-part similarities<a class="headerlink" href="#cross-movie-part-similarities" title="Link to this heading">#</a></h2>
+<p>In the previous part, we obtained two estimates of the tuning matrix of each participant: one based on the first half of the movie (Runs 1 and 2), the other based on the other half of the movie (Runs 3 and 4).</p>
+<p>Here we compute the similarity of tuning matrix estimates from different movie halves, that is between the 9 tuning matrix estimates based on the 1st half of the movie and the 9 tuning matrix estimates based on the 2nd half of the movie.</p>
+<p>This generates a 9 × 9 similarity matrix, where the diagonal of the matrix are within-subject similarities.</p>
+<p>See <a class="reference external" href="https://doi.org/10.1162/imag_a_00032">Feilong et al. (2023)</a> for more details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">nv</span> <span class="o">=</span> <span class="n">Ts12</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">d_mat</span> <span class="o">=</span> <span class="n">cdist</span><span class="p">(</span><span class="n">Ts12</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">Ts34</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+<span class="n">r_mat</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">d_mat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r_mat</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tuning matrix (Runs 1 &amp; 2)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tuning matrix (Runs 3 &amp; 4)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Similarity&#39;</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Similarity&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9ac823f53077003644da2caa899e1ef28f603e7c31a1d1defccac148232ca6e5.png" src="../../../_images/9ac823f53077003644da2caa899e1ef28f603e7c31a1d1defccac148232ca6e5.png" />
+</div>
+</div>
+</section>
+<section id="normalize-the-similarity-matrix">
+<h2>Normalize the similarity matrix<a class="headerlink" href="#normalize-the-similarity-matrix" title="Link to this heading">#</a></h2>
+<p>The similarity matrix based on a single ROI can be noisy.
+If a tuning matrix estimate has low quality, it affects both within-subject similarity and betwen-subject similarities.
+We normalize each row and each column to zero mean to emphasize the differences of within- and between-subject similarities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_mat2</span> <span class="o">=</span> <span class="p">(</span><span class="n">r_mat</span>
+    <span class="o">-</span> <span class="n">r_mat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">r_mat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">r_mat</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">r_mat2</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">r_mat2</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r_mat2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tuning matrix (Runs 1 &amp; 2)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tuning matrix (Runs 3 &amp; 4)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Similarity&#39;</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized similarity&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/3c0f1b019e5dcb55f4b8878605cb1ed38de759e87b52d21569bb4fc3cc5c28b3.png" src="../../../_images/3c0f1b019e5dcb55f4b8878605cb1ed38de759e87b52d21569bb4fc3cc5c28b3.png" />
+</div>
+</div>
+<p>Alternatively, we can use within-subject similarity as the reliability of the participant’s tuning matrix estimates, and use the reliability to adjust the correlation values.</p>
+<p>Based on classical test theory, the correlation between two variables <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> is their “true” correlation (<span class="math notranslate nohighlight">\(r_{a,b}^{\text{true}}\)</span>) attenuated based on the reliabilities of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> (<span class="math notranslate nohighlight">\(\rho_a\)</span> and <span class="math notranslate nohighlight">\(\rho_b\)</span>, respectively).</p>
+<div class="math notranslate nohighlight">
+\[ r_{a,b} = r_{a,b}^{\text{true}} \sqrt{\rho_a \rho_b} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_mat3</span> <span class="o">=</span> <span class="n">r_mat</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">r_mat</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">r_mat</span><span class="p">))[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">r_mat3</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r_mat3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tuning matrix (Runs 1 &amp; 2)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tuning matrix (Runs 3 &amp; 4)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Similarity&#39;</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized similarity&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/1a6dfe5dd86fad231c393dd4e3c8c2cacda11e76afae9715bdcdd194df4d74f6.png" src="../../../_images/1a6dfe5dd86fad231c393dd4e3c8c2cacda11e76afae9715bdcdd194df4d74f6.png" />
+</div>
+</div>
+</section>
+<section id="movie-time-point-segment-classification">
+<h2>Movie time point/segment classification<a class="headerlink" href="#movie-time-point-segment-classification" title="Link to this heading">#</a></h2>
+<p>In this example, we compare the predicted responses with the actual measured responses and try to predict which time point (or segment) of the movie the participant was watching.</p>
+<p>We use data from the first part of the movie for testing (<code class="docutils literal notranslate"><span class="pre">test12</span></code>), and the estimated responses are based on the tuning matrix from the second part of the movie (<code class="docutils literal notranslate"><span class="pre">Ts12</span></code>). Therefore, the training and testing data are independent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Bhats34</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test12</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 1479, 122) (9, 704, 122)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The estimation can be performed by multiplying the stimulus matrix <span class="math notranslate nohighlight">\(S\)</span> of the first part of the movie (based on the training participants) with the tuning matrix <span class="math notranslate nohighlight">\(T\)</span> of the test participant estimated from the second half of the movie.</p>
+<p>Note that in the entire process, the test data (the test participant’s responses to the first half of the movie) is not used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred12_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">S</span><span class="p">[:</span><span class="mi">704</span><span class="p">]</span> <span class="o">@</span> <span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">Ts34</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pred12_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 704, 122)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because the template was built based on responses to the movie, we can also use the corresponding parts of <span class="math notranslate nohighlight">\(\hat{B}\)</span> as the predicted responses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred12</span> <span class="o">=</span> <span class="n">Bhats34</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">704</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pred12</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test12</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 704, 122) (9, 704, 122)
+</pre></div>
+</div>
+</div>
+</div>
+<p>These two estimates are equivalent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">pred12_</span><span class="p">,</span> <span class="n">pred12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">scipy.spatial.distance.cdist</span></code> to compute a <span class="math notranslate nohighlight">\(n_t \times n_t\)</span> matrix, where each element is the correlation distance between the spatial pattern of a time point in the measured data and the spatial pattern of a time point in the predicted data.</p>
+<p>The multi-class classification is correct if the target time point has the smallest correlation distance among all time points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">cdist</span><span class="p">(</span><span class="n">test12</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pred12</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time point (predicted)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time point (measured)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Pattern similarity&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9866b02f1734a0093d509578d725eba53d747131a3d79e100988c7e43ff6bb6e.png" src="../../../_images/9866b02f1734a0093d509578d725eba53d747131a3d79e100988c7e43ff6bb6e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">nv</span> <span class="o">=</span> <span class="n">pred12</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ns</span><span class="p">,</span> <span class="n">ns</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ns</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ns</span><span class="p">):</span>
+        <span class="n">dm</span> <span class="o">=</span> <span class="n">test12</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred12</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">cdist</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+        <span class="n">acc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The classification accuracy based on the participant’s own predicted patterns is higher than those based on other participants’ predicted patterns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Participant (predicted)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Participant (measured)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Classification Accuracy&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/0d5515fceee97243707e09a271d83461136fc19d4145edcd75aa95f9ccf55e0f.png" src="../../../_images/0d5515fceee97243707e09a271d83461136fc19d4145edcd75aa95f9ccf55e0f.png" />
+</div>
+</div>
+</section>
+<section id="movie-segment-classification">
+<h2>Movie segment classification<a class="headerlink" href="#movie-segment-classification" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">nv</span> <span class="o">=</span> <span class="n">pred12</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ns</span><span class="p">,</span> <span class="n">ns</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ns</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ns</span><span class="p">):</span>
+        <span class="n">dm</span> <span class="o">=</span> <span class="n">test12</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">700</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred12</span><span class="p">[</span><span class="n">j</span><span class="p">][:</span><span class="mi">700</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">cdist</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+        <span class="n">acc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nt</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Participant (predicted)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Participant (measured)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Classification Accuracy&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/79ac1e2f54cb424255923205fea393109bb944885dd3c148a18d35ecc2e0b443.png" src="../../../_images/79ac1e2f54cb424255923205fea393109bb944885dd3c148a18d35ecc2e0b443.png" />
+</div>
+</div>
+</section>
+<section id="binary-classification">
+<h2>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">nv</span> <span class="o">=</span> <span class="n">pred12</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ns</span><span class="p">,</span> <span class="n">ns</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ns</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ns</span><span class="p">):</span>
+        <span class="n">dm</span> <span class="o">=</span> <span class="n">test12</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred12</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">cdist</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">d</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">nt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">acc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="n">_</span><span class="o">/</span><span class="mf">2.54</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Participant (predicted)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Participant (measured)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.82</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Classification Accuracy&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/b8d6f3747c8c782772163c0b0c6ba4421a5d8ea46cd5a12a2655605cba872fa0.png" src="../../../_images/b8d6f3747c8c782772163c0b0c6ba4421a5d8ea46cd5a12a2655605cba872fa0.png" />
+</div>
+</div>
+<p>Note that the code above does not handle special cases where the correlation distances with the two predicted patterns are identical.
+In this case, it does not make sense to label the classification as accurate (1.0) or inaccurate (0.0).
+It might be better to mark the accuracy for this pair of patterns as 0.5.
+This can be done by rewrite the comparison <code class="docutils literal notranslate"><span class="pre">np.diag(d)[:,np.newaxis]</span> <span class="pre">&lt;</span> <span class="pre">d</span></code> using <code class="docutils literal notranslate"><span class="pre">np.sign(np.diag(d)[:,np.newaxis]</span> <span class="pre">-</span> <span class="pre">d)</span></code>, and the accuracy can be computed as <code class="docutils literal notranslate"><span class="pre">(sign</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">0.5</span></code>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./backup_build/jupyter_execute/tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparations">Preparations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest-roi">Region of interest (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-folding">Data folding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-functional-template">Create functional template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stimulus-matrix">Stimulus matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individualized-neural-tuning">Individualized neural tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-movie-part-similarities">Cross-movie-part similarities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalize-the-similarity-matrix">Normalize the similarity matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#movie-time-point-segment-classification">Movie time point/segment classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#movie-segment-classification">Movie segment classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary classification</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the neuroboros developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

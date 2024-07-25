@@ -189,6 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="fc.html">Functional connectivity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isc.html">Inter-subject correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rsa2.html">RSA with model RDMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvpc.html">Multivariate pattern classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roi_tpl.html">Local hyperalignment template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="int.html">Individualized Neural Tuning Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slha.html">Searchlight hyperalignment</a></li>
@@ -441,8 +442,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="representational-similarity-analysis">
 <h1>Representational similarity analysis<a class="headerlink" href="#representational-similarity-analysis" title="Link to this heading">#</a></h1>
 <p>Representational similarity analysis (RSA) is widely used to study the representational geometry in the brain.</p>
-<p>In this example, we use the brain responses to the 1st run of the <em>Budapest</em> movie, which has 598 time points (TRs).
-We compute the representational dissimilarity matrices (RDMs) that are 598×598 in size.
+<p>In this example, we use the brain responses to the 1st run of the <em>Life</em> movie, which has 366 time points (TRs).
+We compute the representational dissimilarity matrices (RDMs) that are 366×366 in size.
 Each entry in the matrix is the dissimilarity (distance) between a pair of time points.</p>
 <section id="preparations">
 <h2>Preparations<a class="headerlink" href="#preparations" title="Link to this heading">#</a></h2>
@@ -459,7 +460,7 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Budapest</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Life</span><span class="p">()</span>
 <span class="n">sids</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">subjects</span>
 </pre></div>
 </div>
@@ -467,12 +468,12 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;budapest&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;life&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We use the first participant’s left hemisphere data, which has 598 time points and 9675 cortical vertices.</p>
+<p>We use the first participant’s left hemisphere data, which has 366 time points and 9675 cortical vertices.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -481,7 +482,7 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(598, 9675)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(366, 9675)
 </pre></div>
 </div>
 </div>
@@ -511,8 +512,8 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(178503,)
-178503
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(66795,)
+66795
 </pre></div>
 </div>
 </div>
@@ -526,7 +527,7 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(598, 598)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(366, 366)
 </pre></div>
 </div>
 </div>
@@ -541,8 +542,8 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4217507049050603
-0.4217507049050596
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6921793419466262
+0.6921793419466266
 </pre></div>
 </div>
 </div>
@@ -570,7 +571,7 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(178503,) (178503,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(66795,) (66795,)
 </pre></div>
 </div>
 </div>
@@ -618,7 +619,7 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ab40c1d21d53971087ef4ff84156ce93f3a05c7d4aa629236e11f5f797ad3529.png" src="../_images/ab40c1d21d53971087ef4ff84156ce93f3a05c7d4aa629236e11f5f797ad3529.png" />
+<img alt="../_images/1d302da27952d989445bb5e9bb0f43ac406ecbcc6e33f8720af1d7686b86ee4c.png" src="../_images/1d302da27952d989445bb5e9bb0f43ac406ecbcc6e33f8720af1d7686b86ee4c.png" />
 </div>
 </div>
 </section>
@@ -642,7 +643,7 @@ Each entry in the matrix is the dissimilarity (distance) between a pair of time 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7054eb3bfea33e15c8342c99bbdca8bc7e30dfe2e961581c0623c614e7b2fb72.png" src="../_images/7054eb3bfea33e15c8342c99bbdca8bc7e30dfe2e961581c0623c614e7b2fb72.png" />
+<img alt="../_images/09e19e639119cc75d4a86abab17474f8c32b3cd50ae082fd9f2d2db8cfa74560.png" src="../_images/09e19e639119cc75d4a86abab17474f8c32b3cd50ae082fd9f2d2db8cfa74560.png" />
 </div>
 </div>
 </section>
@@ -676,7 +677,7 @@ See the documentation of <a class="reference external" href="https://docs.scipy.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3659f082ee18c0844f4886aea4bd8e009e0580933b7d6b95e49ffcd3f0e1681d.png" src="../_images/3659f082ee18c0844f4886aea4bd8e009e0580933b7d6b95e49ffcd3f0e1681d.png" />
+<img alt="../_images/606076313ca4f8a60703dade71669409fb4b3e9adb26bd1495ab38796329649a.png" src="../_images/606076313ca4f8a60703dade71669409fb4b3e9adb26bd1495ab38796329649a.png" />
 </div>
 </div>
 </section>
