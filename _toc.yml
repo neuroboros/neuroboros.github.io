@@ -11,6 +11,7 @@ parts:
     - file: tutorials/simple_hyperalignment
     - file: tutorials/discovery
     - file: tutorials/psyc164
+    - file: tutorials/glm
     - file: tutorials/rsa
     - file: tutorials/fc
     - file: tutorials/isc
