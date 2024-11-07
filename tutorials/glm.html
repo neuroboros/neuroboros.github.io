@@ -1,0 +1,1444 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>General Linear Model</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/glm';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Representational similarity analysis" href="rsa.html" />
+    <link rel="prev" title="Environment for PSYC164" href="psyc164.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_name_blk.png" class="logo__image only-light" alt=" - Home"/>
+    <img src="../_static/logo_name_blk.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    neuroboros: Neuroimaging analysis in Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup environment for Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neuroimaging_data_matrix.html">Neuroimaging data as a matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_hyperalignment.html">Searchlight hyperalignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="discovery.html">Using <code class="docutils literal notranslate"><span class="pre">neuroboros</span></code> on Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="psyc164.html">Environment for PSYC164</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">General Linear Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsa.html">Representational similarity analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fc.html">Functional connectivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isc.html">Inter-subject correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsa2.html">RSA with model RDMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roi_tpl.html">Local hyperalignment template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="int.html">Individualized Neural Tuning Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slha.html">Searchlight hyperalignment</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/neuroboros/neuroboros.github.io/blob/main/tutorials/glm.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/neuroboros/neuroboros.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/neuroboros/neuroboros.github.io/issues/new?title=Issue%20on%20page%20%2Ftutorials/glm.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/glm.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>General Linear Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-design">Experimental design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haemodynamic-response-function-and-convolution">Haemodynamic response function and convolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pairing-regressors-with-fmri-data">Pairing regressors with fMRI data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-regressors">Visualizing regressors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-among-regressors">Correlation among regressors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">General Linear Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#category-selective-responses">Category-selective responses</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="general-linear-model">
+<h1>General Linear Model<a class="headerlink" href="#general-linear-model" title="Link to this heading">#</a></h1>
+<p>General linear models (GLMs) are a category of models that is commonly used in neuroimaging data analysis.
+It is typically used to model how a variable (e.g., neural responses of a vertex) changes with a set of regressors (e.g., stimulus presentations).</p>
+<p>In this example, we will use the object category localizer data from the <a class="reference external" href="https://www.studyforrest.org/">StudyForrest</a> dataset.
+In each run, the participant watched images of six categories: faces, scenes, bodies, houses, objects, and scrambled objects.</p>
+<p>The tutorial will focus on the first run of the first participant.
+We will examine which part of the brain responds to a given category, and which part of the brain responds <strong>selectively</strong> to a given category.</p>
+<p>First, let’s import all the packages we need:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib3</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">neuroboros</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">zscore</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">convolve1d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="experimental-design">
+<h2>Experimental design<a class="headerlink" href="#experimental-design" title="Link to this heading">#</a></h2>
+<p>The dataset is available as an <a class="reference external" href="https://openneuro.org/datasets/ds000113">OpenNeuro Dataset</a>.</p>
+<p>For each localizer run, there is a NIFTI file (ends with <code class="docutils literal notranslate"><span class="pre">.nii</span></code> or <code class="docutils literal notranslate"><span class="pre">.nii.gz</span></code>) which is the fMRI data, and a TSV file (<code class="docutils literal notranslate"><span class="pre">.tsv</span></code>), which describes the design of the run.</p>
+<p>For example, here are the <a class="reference external" href="https://openneuro.org/datasets/ds000113/versions/1.3.0/file-display/sub-01:ses-localizer:func:sub-01_ses-localizer_task-objectcategories_run-1_bold.nii.gz">NIFTI file</a> and the <a class="reference external" href="https://openneuro.org/datasets/ds000113/versions/1.3.0/file-display/sub-01:ses-localizer:func:sub-01_ses-localizer_task-objectcategories_run-1_events.tsv">TSV file</a> of the first localizer run.</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> function of the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package to load the TSV file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://openneuro.org/crn/datasets/ds000113/objects/&#39;</span>\
+      <span class="s1">&#39;4a71014ac9ebeeddace74d0ec8164204869bc1d6&#39;</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the file, each block/trial is described using three attributes:</p>
+<ul class="simple">
+<li><p><strong>onset</strong> (When did the block start relative to the start of the scan),</p></li>
+<li><p><strong>duration</strong> (How long did the block last), and</p></li>
+<li><p><strong>trial_type</strong> (What was the condition/stimulus type of the block).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>onset</th>
+      <th>duration</th>
+      <th>trial_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11.995</td>
+      <td>16</td>
+      <td>face</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>35.988</td>
+      <td>16</td>
+      <td>scene</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>59.996</td>
+      <td>16</td>
+      <td>body</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>83.989</td>
+      <td>16</td>
+      <td>house</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>107.997</td>
+      <td>16</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>131.989</td>
+      <td>16</td>
+      <td>scramble</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>155.998</td>
+      <td>16</td>
+      <td>scramble</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>179.990</td>
+      <td>16</td>
+      <td>body</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>203.999</td>
+      <td>16</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>227.991</td>
+      <td>16</td>
+      <td>face</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>252.000</td>
+      <td>16</td>
+      <td>house</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>275.992</td>
+      <td>16</td>
+      <td>scene</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For the data we are going to use, the repetition time (TR) is 2 seconds, and each run contains 156 time points (TRs).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TR</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="mi">156</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We subdivide each TR into 256 smaller time points for a higher temporal precision.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_div</span> <span class="o">=</span> <span class="mi">256</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nt</span> <span class="o">*</span> <span class="n">n_div</span><span class="p">)</span> <span class="o">*</span> <span class="n">TR</span> <span class="o">/</span> <span class="n">n_div</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on the design we got from the TSV file, we know when a block started and ended.</p>
+<p>By aggregating across all blocks of the same type, we know when the stimulus category was presented to the participant or not at any given time point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blocks</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trial_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;face&#39;</span><span class="p">]</span>
+<span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">blocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">onset</span> <span class="o">=</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;onset&#39;</span><span class="p">]</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">onset</span> <span class="o">+</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Block onset: </span><span class="si">{</span><span class="n">onset</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> s, Block offset: </span><span class="si">{</span><span class="n">offset</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+    <span class="n">regressor</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="n">onset</span><span class="p">,</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">offset</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Block onset:  11.99 s, Block offset:  27.99 s
+Block onset: 227.99 s, Block offset: 243.99 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">regressor</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e87b3814dc76504bc3ba6fec5b613f678b103811bc97d59f739e20a58fddcd2b.png" src="../_images/e87b3814dc76504bc3ba6fec5b613f678b103811bc97d59f739e20a58fddcd2b.png" />
+</div>
+</div>
+<p>Here are the boxcar regressors for all stimulus categories:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;face&#39;</span><span class="p">,</span> <span class="s1">&#39;scene&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;house&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;scramble&#39;</span><span class="p">]</span>
+<span class="n">original_regressors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">condition</span> <span class="ow">in</span> <span class="n">conditions</span><span class="p">:</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trial_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">condition</span><span class="p">]</span>
+    <span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">blocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">onset</span> <span class="o">=</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;onset&#39;</span><span class="p">]</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">onset</span> <span class="o">+</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span>
+        <span class="n">regressor</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="n">onset</span><span class="p">,</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">offset</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">original_regressors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">regressor</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">regressor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">condition</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6c6782cd22fd03ea704170bad1362bb653cdf2360be7dff30422d6278f1a9e62.png" src="../_images/6c6782cd22fd03ea704170bad1362bb653cdf2360be7dff30422d6278f1a9e62.png" />
+</div>
+</div>
+</section>
+<section id="haemodynamic-response-function-and-convolution">
+<h2>Haemodynamic response function and convolution<a class="headerlink" href="#haemodynamic-response-function-and-convolution" title="Link to this heading">#</a></h2>
+<p>To account for the haemodynamic response function (HRF), we will need to convolve these regressors.
+Here we will use the HRF from SPM5, which was used by <a class="reference external" href="https://doi.org/10.1038/nmeth.1868">Mantini et al., 2012</a> and shown in its
+<a class="reference external" href="https://static-content.springer.com/esm/art%3A10.1038%2Fnmeth.1868/MediaObjects/41592_2012_BFnmeth1868_MOESM189_ESM.pdf">Supplementary Figure 1</a>.</p>
+<p>The HRF is the difference between two Gamma functions, one for the main response and the other for the undershoot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">n_div</span><span class="p">)</span> <span class="o">*</span> <span class="n">TR</span> <span class="o">/</span> <span class="n">n_div</span>
+<span class="n">bold</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-</span> <span class="n">gamma</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.0</span>
+<span class="n">bold</span> <span class="o">/=</span> <span class="n">bold</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">bold</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f4ca4948efdda49e549cd21b506b56b88d67b368ec55dc03e29d3532cebc8cd6.png" src="../_images/f4ca4948efdda49e549cd21b506b56b88d67b368ec55dc03e29d3532cebc8cd6.png" />
+</div>
+</div>
+<p>Now we use the HRF to convolve our regressors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">bold</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">convolved</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">original_regressors</span><span class="p">:</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">convolve1d</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">bold</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">convolved</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After convolution, the regressors correctly reflect the haemodynamic delay:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">original_regressors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">convolved</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;convolved&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9744366f5ed653e6935724106885c7a2eab8644d0d9ce626a33668fde49febd8.png" src="../_images/9744366f5ed653e6935724106885c7a2eab8644d0d9ce626a33668fde49febd8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">condition</span><span class="p">,</span> <span class="n">regressor</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">convolved</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">regressor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">condition</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ee4d4a60303d795901b8cefa205313f3bc2f6c05cf3b75876eb8f3628ec426f1.png" src="../_images/ee4d4a60303d795901b8cefa205313f3bc2f6c05cf3b75876eb8f3628ec426f1.png" />
+</div>
+</div>
+</section>
+<section id="pairing-regressors-with-fmri-data">
+<h2>Pairing regressors with fMRI data<a class="headerlink" href="#pairing-regressors-with-fmri-data" title="Link to this heading">#</a></h2>
+<p>The regressors we use have higher temporal resolution.
+Here we downsample them to match our fMRI data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regressors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">convolved</span><span class="p">:</span>
+    <span class="n">downsampled</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_div</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">regressors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">downsampled</span><span class="p">)</span>
+<span class="n">regressors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">regressors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fMRI data have been preprocessed with fMRIPrep and curated using neuroboros.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Forrest</span><span class="p">()</span>
+<span class="n">sids</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">subjects</span>
+<span class="n">sid</span> <span class="o">=</span> <span class="n">sids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Besides the data matrix, we also have the confounding variables (aka nuisance regressors) from fMRIPrep.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span>
+    <span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;objectcategories&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;onavg-ico32&#39;</span><span class="p">,</span> <span class="n">dset</span><span class="o">.</span><span class="n">surface_resample</span><span class="p">)</span>
+<span class="n">confounds</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">load_confounds</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s1">&#39;objectcategories&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">regressors</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((39936,), (156, 6), (156, 20484), (156, 22))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.06436624, -0.09735048,  0.05634564, ...,  1.        ,
+        -1.        ,  1.        ],
+       [ 0.00996179, -0.05005741, -0.05963685, ...,  1.        ,
+        -0.98709677,  0.96154006],
+       [ 0.0916715 , -0.03550841,  0.20058609, ...,  1.        ,
+        -0.97419355,  0.9235796 ],
+       ...,
+       [-0.09220897, -0.03032143,  0.00818588, ...,  1.        ,
+         0.97419355,  0.9235796 ],
+       [-0.01562807, -0.09659374,  0.05209395, ...,  1.        ,
+         0.98709677,  0.96154006],
+       [ 0.12948981,  0.01547053,  0.04359279, ...,  1.        ,
+         1.        ,  1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>global_signal</th>
+      <th>global_signal_derivative1</th>
+      <th>global_signal_power2</th>
+      <th>global_signal_derivative1_power2</th>
+      <th>csf</th>
+      <th>csf_derivative1</th>
+      <th>csf_power2</th>
+      <th>csf_derivative1_power2</th>
+      <th>white_matter</th>
+      <th>white_matter_derivative1</th>
+      <th>...</th>
+      <th>rot_x_power2</th>
+      <th>rot_x_derivative1_power2</th>
+      <th>rot_y</th>
+      <th>rot_y_derivative1</th>
+      <th>rot_y_power2</th>
+      <th>rot_y_derivative1_power2</th>
+      <th>rot_z</th>
+      <th>rot_z_derivative1</th>
+      <th>rot_z_derivative1_power2</th>
+      <th>rot_z_power2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>292.435067</td>
+      <td>NaN</td>
+      <td>85518.268259</td>
+      <td>NaN</td>
+      <td>396.300730</td>
+      <td>NaN</td>
+      <td>157054.268405</td>
+      <td>NaN</td>
+      <td>313.936551</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>5.041148e-06</td>
+      <td>NaN</td>
+      <td>0.000101</td>
+      <td>NaN</td>
+      <td>1.014895e-08</td>
+      <td>NaN</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>292.718334</td>
+      <td>0.283267</td>
+      <td>85684.023107</td>
+      <td>0.080240</td>
+      <td>396.542604</td>
+      <td>0.241874</td>
+      <td>157246.036838</td>
+      <td>0.058503</td>
+      <td>314.475375</td>
+      <td>0.538824</td>
+      <td>...</td>
+      <td>2.927624e-06</td>
+      <td>2.853910e-07</td>
+      <td>-0.000000</td>
+      <td>-0.000101</td>
+      <td>0.000000e+00</td>
+      <td>1.014895e-08</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>292.599236</td>
+      <td>-0.119098</td>
+      <td>85614.312671</td>
+      <td>0.014184</td>
+      <td>397.557162</td>
+      <td>1.014558</td>
+      <td>158051.696889</td>
+      <td>1.029327</td>
+      <td>314.805351</td>
+      <td>0.329976</td>
+      <td>...</td>
+      <td>4.471575e-06</td>
+      <td>1.628768e-07</td>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>292.478735</td>
+      <td>-0.120501</td>
+      <td>85543.810359</td>
+      <td>0.014520</td>
+      <td>397.155322</td>
+      <td>-0.401840</td>
+      <td>157732.349869</td>
+      <td>0.161475</td>
+      <td>313.778681</td>
+      <td>-1.026670</td>
+      <td>...</td>
+      <td>2.371076e-06</td>
+      <td>3.303720e-07</td>
+      <td>-0.000095</td>
+      <td>-0.000095</td>
+      <td>9.078431e-09</td>
+      <td>9.078431e-09</td>
+      <td>-5.293960e-23</td>
+      <td>-5.293960e-23</td>
+      <td>2.802601e-45</td>
+      <td>2.802601e-45</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>291.915179</td>
+      <td>-0.563556</td>
+      <td>85214.471729</td>
+      <td>0.317595</td>
+      <td>396.402329</td>
+      <td>-0.752993</td>
+      <td>157134.806478</td>
+      <td>0.566999</td>
+      <td>313.849771</td>
+      <td>0.071090</td>
+      <td>...</td>
+      <td>2.661629e-06</td>
+      <td>8.394224e-09</td>
+      <td>-0.000180</td>
+      <td>-0.000084</td>
+      <td>3.228957e-08</td>
+      <td>7.125420e-09</td>
+      <td>0.000000e+00</td>
+      <td>5.293960e-23</td>
+      <td>2.802601e-45</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>151</th>
+      <td>292.969152</td>
+      <td>-0.309593</td>
+      <td>85830.923750</td>
+      <td>0.095848</td>
+      <td>398.315568</td>
+      <td>1.822215</td>
+      <td>158655.292049</td>
+      <td>3.320469</td>
+      <td>314.812829</td>
+      <td>0.631811</td>
+      <td>...</td>
+      <td>7.688273e-07</td>
+      <td>1.033700e-07</td>
+      <td>0.000705</td>
+      <td>0.000000</td>
+      <td>4.966542e-07</td>
+      <td>0.000000e+00</td>
+      <td>-1.532280e-04</td>
+      <td>-9.853670e-05</td>
+      <td>9.709481e-09</td>
+      <td>2.347882e-08</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>293.315032</td>
+      <td>0.345881</td>
+      <td>86033.708032</td>
+      <td>0.119633</td>
+      <td>397.179822</td>
+      <td>-1.135747</td>
+      <td>157751.810807</td>
+      <td>1.289921</td>
+      <td>314.350860</td>
+      <td>-0.461968</td>
+      <td>...</td>
+      <td>1.502855e-06</td>
+      <td>1.218582e-07</td>
+      <td>0.000705</td>
+      <td>0.000000</td>
+      <td>4.966542e-07</td>
+      <td>0.000000e+00</td>
+      <td>-1.532280e-04</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>2.347882e-08</td>
+    </tr>
+    <tr>
+      <th>153</th>
+      <td>293.217327</td>
+      <td>-0.097705</td>
+      <td>85976.400942</td>
+      <td>0.009546</td>
+      <td>397.896884</td>
+      <td>0.717062</td>
+      <td>158321.930014</td>
+      <td>0.514178</td>
+      <td>315.146570</td>
+      <td>0.795710</td>
+      <td>...</td>
+      <td>8.663216e-07</td>
+      <td>8.711116e-08</td>
+      <td>0.001006</td>
+      <td>0.000301</td>
+      <td>1.011513e-06</td>
+      <td>9.060281e-08</td>
+      <td>-1.532280e-04</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>2.347882e-08</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>293.250529</td>
+      <td>0.033202</td>
+      <td>85995.872768</td>
+      <td>0.001102</td>
+      <td>396.355571</td>
+      <td>-1.541313</td>
+      <td>157097.738436</td>
+      <td>2.375646</td>
+      <td>314.618423</td>
+      <td>-0.528147</td>
+      <td>...</td>
+      <td>6.301708e-07</td>
+      <td>1.875010e-08</td>
+      <td>0.000909</td>
+      <td>-0.000096</td>
+      <td>8.267774e-07</td>
+      <td>9.305882e-09</td>
+      <td>-1.532280e-04</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>2.347882e-08</td>
+    </tr>
+    <tr>
+      <th>155</th>
+      <td>293.056588</td>
+      <td>-0.193941</td>
+      <td>85882.163617</td>
+      <td>0.037613</td>
+      <td>399.133676</td>
+      <td>2.778105</td>
+      <td>159307.691049</td>
+      <td>7.717867</td>
+      <td>315.424945</td>
+      <td>0.806521</td>
+      <td>...</td>
+      <td>5.335937e-07</td>
+      <td>4.014236e-09</td>
+      <td>0.001097</td>
+      <td>0.000188</td>
+      <td>1.203914e-06</td>
+      <td>3.532783e-08</td>
+      <td>0.000000e+00</td>
+      <td>1.532280e-04</td>
+      <td>2.347882e-08</td>
+      <td>0.000000e+00</td>
+    </tr>
+  </tbody>
+</table>
+<p>156 rows × 107 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-regressors">
+<h2>Visualizing regressors<a class="headerlink" href="#visualizing-regressors" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">regressors</span><span class="p">,</span> <span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/miniconda3/envs/nb/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:2999: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/feilong/miniconda3/envs/nb/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3000: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">zscore</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5da18ea0c59016f867650a99a175602169a42f235d9112b8185cc70d5128618c.png" src="../_images/5da18ea0c59016f867650a99a175602169a42f235d9112b8185cc70d5128618c.png" />
+</div>
+</div>
+</section>
+<section id="correlation-among-regressors">
+<h2>Correlation among regressors<a class="headerlink" href="#correlation-among-regressors" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;design&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;aCompCor&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;FD&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;motion parameters&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">18.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">25</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;poly&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">annotation_clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Correlation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/227e5ee18fa4b9be7181eee2c696cbd43b67ac3ef29327476cbf788455d32f7d.png" src="../_images/227e5ee18fa4b9be7181eee2c696cbd43b67ac3ef29327476cbf788455d32f7d.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>General Linear Model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta_conf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dm</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">denoised</span> <span class="o">=</span> <span class="n">dm</span> <span class="o">-</span> <span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">@</span> <span class="n">beta_conf</span>
+<span class="n">denoised</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">zscore</span><span class="p">(</span><span class="n">denoised</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">R2s</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">glm</span><span class="p">(</span>
+    <span class="n">denoised</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">return_r2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/feilong/miniconda3/envs/nb/lib/python3.12/site-packages/neuroboros/glm.py:65: RuntimeWarning: divide by zero encountered in divide
+  ratio = np.sqrt(mid) / sigma
+/Users/feilong/miniconda3/envs/nb/lib/python3.12/site-packages/neuroboros/glm.py:67: RuntimeWarning: invalid value encountered in multiply
+  t = R_beta * ratio
+/Users/feilong/miniconda3/envs/nb/lib/python3.12/site-packages/neuroboros/glm.py:81: RuntimeWarning: invalid value encountered in divide
+  R2s = 1 - ss_res * dof_all / (ss_all * dof_res)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R2s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9320c626fc1206692d93775f56347b4b6f4178876e45241736592d8040151cba.png" src="../_images/9320c626fc1206692d93775f56347b4b6f4178876e45241736592d8040151cba.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">conditions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;face&#39;</span><span class="p">)],</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8bf147746eeea0be412c3a78cf726928fab2eb0fbccf72c623691fc917dd6d92.png" src="../_images/8bf147746eeea0be412c3a78cf726928fab2eb0fbccf72c623691fc917dd6d92.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">conditions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;house&#39;</span><span class="p">)],</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b943266cd4e8f6efa7489a57f40beca06768d020118034ce62df47f8231c691c.png" src="../_images/b943266cd4e8f6efa7489a57f40beca06768d020118034ce62df47f8231c691c.png" />
+</div>
+</div>
+</section>
+<section id="category-selective-responses">
+<h2>Category-selective responses<a class="headerlink" href="#category-selective-responses" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># [&#39;face&#39;, &#39;scene&#39;, &#39;body&#39;, &#39;house&#39;, &#39;object&#39;, &#39;scramble&#39;]</span>
+<span class="n">contrasts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># face vs. others</span>
+    <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># scene/house vs. others</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">R2s</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">glm</span><span class="p">(</span>
+    <span class="n">denoised</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="n">confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">contrasts</span><span class="o">=</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">return_r2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Face vs. Others&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a9033cf6e792ae90db22fa4f6ca3986c3477f2b3610c6935e3687c090a45f7d3.png" src="../_images/a9033cf6e792ae90db22fa4f6ca3986c3477f2b3610c6935e3687c090a45f7d3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scene/House vs. Others&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/82298b070c92dbc5ecdb6a3ce76d55fdff6dd4752c60591a5221a7c9cbefbd1c.png" src="../_images/82298b070c92dbc5ecdb6a3ce76d55fdff6dd4752c60591a5221a7c9cbefbd1c.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="psyc164.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Environment for PSYC164</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="rsa.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Representational similarity analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-design">Experimental design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haemodynamic-response-function-and-convolution">Haemodynamic response function and convolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pairing-regressors-with-fmri-data">Pairing regressors with fMRI data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-regressors">Visualizing regressors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-among-regressors">Correlation among regressors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">General Linear Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#category-selective-responses">Category-selective responses</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the neuroboros developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
