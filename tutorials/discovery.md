@@ -20,7 +20,7 @@ You may have access to the [DBIC resources on Discovery](https://www.dartmouth.e
 
 After you have created a Discovery account, you can access Discovery with SSH:
 ```bash
-ssh NetID@discovery7
+ssh NetID@discovery8
 ```
 You need to replace `NetID` with your real NetID.
 If you don't know your NetID, you can [look it up](https://lookup.dartmouth.edu/).
@@ -31,8 +31,8 @@ In addition to the config, you can also setup an [SSH key](https://docs.github.c
 
 You can edit your SSH config (located at `$HOME/.ssh/config`) to make things easier. For example, you can add the following lines to your SSH config (again, replace `NetID` with your real NetID):
 ```
-Host d7
-  HostName discovery7.dartmouth.edu
+Host discovery
+  HostName discovery8.dartmouth.edu
   User NetID
 Host ndoli
   HostName ndoli.dartmouth.edu
@@ -41,7 +41,7 @@ Host ndoli
 
 With these settings, you can access Discovery much easier:
 ```bash
-ssh d7
+ssh discovery
 ```
 
 ## Linking the data directory
@@ -64,7 +64,7 @@ The Python module is already installed on Discovery. You can load the Python mod
 module load python
 ```
 
-To automatically load the Python module when you log in, you can add add it to the list of auto-loaded modules:
+To automatically load the Python module when you log in, you can add it to the list of auto-loaded modules:
 ```bash
 module initadd python
 ```
